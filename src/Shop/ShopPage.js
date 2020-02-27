@@ -3,6 +3,7 @@ import { isEmpty } from 'lodash';
 import { useShopifyStore } from '../common/ShopifyProvider';
 import { useProductsStore } from '../common/ProductsProvider';
 import Product from './Product';
+import './ShopPage.scss';
 
 const ShopPage = () => {
 	const {
@@ -17,9 +18,8 @@ const ShopPage = () => {
 		}
 	})
 
-	console.warn('yeet products', products);
 	return (
-		<div>
+		<div className='shop-page'>
 			<p>SHOPPINGGGG HEADERRRRR</p>
 			{!isEmpty(products) && products.map(product => <Product key={product[0].id} item={product[0]}/>)}
 		</div>
