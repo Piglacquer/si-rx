@@ -1,9 +1,10 @@
 import React from 'react';
 import AppRouter from './Navigation/Router';
 import NavBar from './Navigation/NavBar';
+
 import './App.scss';
 
-const App = ({client}) => {
+const App = () => {
   return (
     <div className="App">
       <NavBar />
@@ -12,4 +13,5 @@ const App = ({client}) => {
   );
 }
 
+// export default App;
 export default App;

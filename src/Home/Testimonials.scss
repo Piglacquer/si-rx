@@ -1,0 +1,22 @@
+
+
+.testimonials-container {
+	display: flex;
+	flex-flow: column nowrap;
+
+	.quote {
+		font-size: 2rem;
+		width: 45%;
+		margin: 20px;
+		font-family:'Roboto';
+		font-style: italic;
+	}
+
+	.left {
+		align-self: flex-start;
+	}
+
+	.right {
+		align-self: flex-end;
+	}
+}
