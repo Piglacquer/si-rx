@@ -1,17 +1,34 @@
-import React, { useState } from 'react';
-import { Dropdown, Card, Carousel } from 'react-bootstrap';
+import React, { PureComponent, useState } from 'react';
+import { Dropdown, Card, Carousel, Button } from 'react-bootstrap';
+import { useCartStore } from '../common/CartProvider';
+import { useShopifyStore } from '../common/ShopifyProvider';
 import './Product.scss';
 
+const addToCart = ({addItemToCart, shopify, cart, size, quantity}) => {
+		if (size.variantId) {
+			const item = {
+				variantId: size.variantId,
+				quantity
+			};
+	
+			return addItemToCart(item, shopify, cart);
+		}
+		return;
+}
+
 const Product = ({item}) => {
-	const [size, setSize] = useState('Size');
+	const { addItemToCart, cart } = useCartStore();
+	const { shopify } = useShopifyStore();
+	const [ size, setSize ] = useState({title: 'Size'});
+	const [ quantity, setQuantity ] = useState(1)
+
 	const { 
 		title,
 		description,
 		images,
-		options,
+		variants,
 	} = item;
 
-	console.warn('yeet item', images[0]);
 	return (
 		<Card className='product-container'>
 			<Card.Header>{title}</Card.Header>
@@ -27,22 +44,33 @@ const Product = ({item}) => {
 			)}
 			<Card.Body>
 				<Card.Text>{description}</Card.Text>
-				{options[0].values.length > 1 && (
+				{variants.length > 1 && (
 					<Dropdown>
 						<Dropdown.Toggle variant='info' id='dropdown-basic'>
-							{size}
+							{size.title}
 						</Dropdown.Toggle>
 						<Dropdown.Menu>
-							{options[0].values.map((option, index) => (
-								<Dropdown.Item key={`${option.value}${index}`} onClick={() => setSize(option.value)}>{option.value}</Dropdown.Item>
+							{variants.map((variant, index) => (
+								<Dropdown.Item
+									key={`${variant.title}${index}`}
+									onClick={() => setSize({title: variant.title, variantId: variant.id})}
+								>
+									{variant.title}
+								</Dropdown.Item>
 								)
 							)}
 						</Dropdown.Menu>
 					</Dropdown>
 				)}
+				<Button
+					variant='success'
+					onClick={() => addToCart({addItemToCart, shopify, cart, size, quantity})}
+				>
+					Add To Cart
+				</Button>
 			</Card.Body>
 		</Card>
-	)
+	);
 }
 
 export default Product;
