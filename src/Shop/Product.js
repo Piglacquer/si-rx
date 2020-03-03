@@ -1,26 +1,49 @@
-import React, { PureComponent, useState } from 'react';
-import { Dropdown, Card, Carousel, Button } from 'react-bootstrap';
+import React, { useState } from 'react';
+import { Dropdown, Card, Carousel, Button, Alert } from 'react-bootstrap';
 import { useCartStore } from '../common/CartProvider';
 import { useShopifyStore } from '../common/ShopifyProvider';
 import './Product.scss';
 
-const addToCart = ({addItemToCart, shopify, cart, size, quantity}) => {
+const addToCart = ({addItemToCart, shopify, cart, size, quantity, incrementItemInCart}) => {
 		if (size.variantId) {
+			const { lineItems, id: cartId } = cart;
+			const itemInCart = lineItems.find(cartItem => cartItem.variant.id === size.variantId);
+			if (itemInCart) {
+						const { quantity } = itemInCart;
+						const itemToUpdate = [{ id: itemInCart.id, quantity: quantity + 1}];
+						return incrementItemInCart({cartId, item: itemToUpdate, shopify});
+			}
 			const item = {
 				variantId: size.variantId,
 				quantity
 			};
-	
 			return addItemToCart(item, shopify, cart);
 		}
 		return;
 }
 
+const createAlert = (type) => {
+	const messages = {
+		success: 'Added to cart!',
+		noSize: 'Please select a size!',
+		failure: 'An error has occured, please try again later'
+	}
+
+	const variants = {
+		success: 'success',
+		noSize: 'warning',
+		failure: 'danger'
+	}
+
+return <Alert variant={variants[type]}>{messages[type]}</Alert>;
+};
+
 const Product = ({item}) => {
-	const { addItemToCart, cart } = useCartStore();
+	const { addItemToCart, incrementItemInCart, cart } = useCartStore();
 	const { shopify } = useShopifyStore();
-	const [ size, setSize ] = useState({title: 'Size'});
-	const [ quantity, setQuantity ] = useState(1)
+	const [ size, setSize ] = useState({title: 'Size', variantId: null});
+	const [ quantity, setQuantity ] = useState(1);
+	const [ alert, setAlert ] = useState('')
 
 	const { 
 		title,
@@ -44,6 +67,7 @@ const Product = ({item}) => {
 			)}
 			<Card.Body>
 				<Card.Text>{description}</Card.Text>
+				<div>{alert}</div>
 				{variants.length > 1 && (
 					<Dropdown>
 						<Dropdown.Toggle variant='info' id='dropdown-basic'>
@@ -64,7 +88,13 @@ const Product = ({item}) => {
 				)}
 				<Button
 					variant='success'
-					onClick={() => addToCart({addItemToCart, shopify, cart, size, quantity})}
+					onClick={() => {
+						if (size.variantId || variants.length <= 1) {
+							addToCart({addItemToCart, shopify, cart, size, quantity, incrementItemInCart })
+							return setAlert(createAlert('success'))
+						}
+						return setAlert(createAlert('noSize'))
+					}}
 				>
 					Add To Cart
 				</Button>

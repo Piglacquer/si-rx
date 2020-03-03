@@ -5,7 +5,7 @@ const Context = React.createContext();
 export const ProductsProvider = ({children}) => {
 	const [ products, addProducts ] = useState([]);
 
-	const setProducts = useCallback(products => addProducts([products]), [addProducts]);
+	const setProducts = useCallback(products => addProducts(products), [addProducts]);
 
 	const value = { products, setProducts };
 

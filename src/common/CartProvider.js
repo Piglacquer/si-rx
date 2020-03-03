@@ -5,8 +5,6 @@ const Context = React.createContext();
 export const CartProvider = ({children}) => {
 	const [ cart, setCart ] = useState({});
 
-	const addItemToCart = useCallback((item, shopify, cart) => {
-		const { id: checkoutId } = cart;
 		// item format:
 		// [{
 		// 	variantId: String,
@@ -15,22 +13,31 @@ export const CartProvider = ({children}) => {
 		// }, 
 		// {...}]
 
+	const addItemToCart = useCallback((item, shopify, cart) => {
+		const { id: checkoutId } = cart;
 		if (item && shopify) {
-			shopify.checkout.addLineItems(checkoutId, item).then(updatedCart => {
-				console.warn('yeet item added to cart', updatedCart);
+			return shopify.checkout.addLineItems(checkoutId, item).then(updatedCart => {
 				return setCart(updatedCart)
 			});
 		}
-
 		console.warn('yeet unable to add item to cart');
-		return setCart({...cart});
+		return;
 	}, [setCart]);
-		
+	
+	const incrementItemInCart = useCallback(({cartId, item, shopify}) => {
+		if (cartId && item && shopify) {
+			return shopify.checkout.updateLineItems(cartId, item).then(updatedCart => {
+				return setCart(updatedCart);
+			})
+		}
+		return;
+	}, [setCart]);
+
 	const removeItemFromCart = useCallback(item => setCart(cart => cart.filter(cartItem => cartItem.name !== item.name)), [setCart]);
 
 	const createCart = useCallback(initialCart => setCart(cart => initialCart), [setCart]);
 
-	const value = { cart, createCart, addItemToCart, removeItemFromCart };
+	const value = { cart, createCart, addItemToCart, incrementItemInCart, removeItemFromCart };
 
 	return (
 		<Context.Provider value={value}>

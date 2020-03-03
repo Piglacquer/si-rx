@@ -14,7 +14,6 @@ const App = () => {
     if (isEmpty(cart)) {
       shopify.checkout.create().then(initialCart => createCart(initialCart));
     }
-    console.warn('yeet cart', cart);
   });
 
   return (
