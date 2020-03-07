@@ -33,7 +33,16 @@ export const CartProvider = ({children}) => {
 		return;
 	}, [setCart]);
 
-	const removeItemFromCart = useCallback(item => setCart(cart => cart.filter(cartItem => cartItem.name !== item.name)), [setCart]);
+	const removeItemFromCart = useCallback((item, shopify, cart) => {
+		const { id: checkoutId } = cart;
+		if(item && shopify) {
+			return shopify.checkout.removeLineItems(checkoutId, item).then(updatedCart => {
+				return setCart(updatedCart);
+			})
+		}
+		console.warn('yeet unable to remove item from cart');
+		return;
+	}, [setCart]);
 
 	const createCart = useCallback(initialCart => setCart(cart => initialCart), [setCart]);
 

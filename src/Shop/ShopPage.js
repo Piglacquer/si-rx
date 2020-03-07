@@ -19,7 +19,7 @@ const ShopPage = () => {
 	})
 	return (
 		<div className='shop-page'>
-			<p>SHOPPINGGGG HEADERRRRR</p>
+			<h1 className='page-header'>Shop</h1>
 			{!isEmpty(products) && products.map(product => <Product key={product.id} item={product}/>)}
 		</div>
 	)
