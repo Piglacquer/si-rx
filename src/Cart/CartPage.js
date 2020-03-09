@@ -14,6 +14,9 @@ const CartPage = () => {
 			<ListGroup>
 				{cart?.lineItems && cart.lineItems.map((item, index) => <CartItem key={item.id} item={item} cart={cart}/>)}
 			</ListGroup>
+			{cart?.lineItems?.length === 0 && (
+			<p className='empty-cart-message'>Your cart is empty</p>
+			)}
 		</div>
 	)
 }

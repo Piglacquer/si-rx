@@ -10,13 +10,27 @@
 	z-index: 10;
 
 	.links-container {
+		display: flex;
+		flex-flow: row nowrap;
 		justify-content: 'space-between';
+		align-items: center;
+		margin-right: 20px;
 
 		.link {
+			display: flex;
+			flex-flow: row nowrap;
 			color: white;
 			text-decoration: none;
-			align-self: center;
+			align-items: center;
 			margin-right: 20px;
+
+			.items-number {
+				width: 18px;
+				font-size: 12px;
+				background-color: red;
+				border-radius: 8px;
+				text-align: center;
+			}
 		}
 	}
 

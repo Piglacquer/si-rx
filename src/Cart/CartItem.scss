@@ -1,7 +1,22 @@
 .item-container {
 	width: 80%;
 	display: flex;
-	flex-direction: row nowrap;
+	flex-flow: row nowrap;
 	justify-content: space-between;
 	align-self: center;
+	
+	.item-info-container {
+		display: flex;
+		flex-flow: row nowrap;
+		width: 40%;
+		justify-content: space-between;
+		align-items: center;
+	}
+
+	.item-quantity-remove-container {
+		display: flex;
+		flex-flow: row nowrap;
+		width: 35%;
+		justify-content: space-between;
+	}
 }

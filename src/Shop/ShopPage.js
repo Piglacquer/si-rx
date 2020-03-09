@@ -17,10 +17,13 @@ const ShopPage = () => {
 			shopify.product.fetchAll().then(res => setProducts(res));
 		}
 	})
+
 	return (
 		<div className='shop-page'>
 			<h1 className='page-header'>Shop</h1>
-			{!isEmpty(products) && products.map(product => <Product key={product.id} item={product}/>)}
+			<div className='products-container'>
+				{!isEmpty(products) && products.map(product => <Product key={product.id} item={product}/>)}
+			</div>
 		</div>
 	)
 };
