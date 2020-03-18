@@ -20,7 +20,7 @@ const NavBar = () => {
 				<Link className='link' to='/shop'>Shop</Link>
 				<Link className='link' to='/cart'>
 					Cart
-						<p className='items-number'>{lineItems?.length}</p>
+						{lineItems?.length > 0 && <p className='items-number'>{lineItems?.length}</p>}
 				</Link>
 			</div>
 		</div>

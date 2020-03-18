@@ -9,6 +9,7 @@ import createStoreProvider from './common/createStoreProvider';
 import { CartProvider } from './common/CartProvider';
 import { ProductsProvider } from './common/ProductsProvider';
 import { ShopifyProvider } from './common/ShopifyProvider';
+import { BlogProvider } from './common/BlogProvider';
 
 const client = Client.buildClient({
 	domain: 'sirx-mobility.myshopify.com',
@@ -19,6 +20,7 @@ const StoreProvider = createStoreProvider([
 	ProductsProvider,
 	CartProvider,
 	ShopifyProvider,
+	BlogProvider,
 ])
 
 client.product.fetchAll()

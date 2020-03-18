@@ -1,6 +1,7 @@
 import React from 'react';
 import { ListGroup } from 'react-bootstrap';
 import CartItem from './CartItem';
+import Checkout from './Checkout';
 import { useCartStore } from '../common/CartProvider';
 import './CartPage.scss';
 
@@ -17,6 +18,7 @@ const CartPage = () => {
 			{cart?.lineItems?.length === 0 && (
 			<p className='empty-cart-message'>Your cart is empty</p>
 			)}
+			{cart?.lineItems?.length > 0 && <Checkout cartUrl={cart.webUrl}/>}
 		</div>
 	)
 }

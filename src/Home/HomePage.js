@@ -9,7 +9,6 @@ const HomePage = () => (
 		<Testimonials />
 		{/* // videos */}
 		{/* // information */}
-		<p>IM HOME</p>
 	</div>
 );
 
