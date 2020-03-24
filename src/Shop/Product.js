@@ -55,8 +55,8 @@ const Product = ({item}) => {
 	return (
 		<Card className='product-container'>
 			<Card.Header>{title}</Card.Header>
-			{images.length < 2 && <Card.Img className='product-image' variant='top' src={images[0].src} />}
-			{images.length >= 2 && (
+			{images.length > 0 && images.length < 2 && <Card.Img className='product-image' variant='top' src={images[0].src} />}
+			{images.length > 0 && images.length >= 2 && (
 				<Carousel>
 					{images.map((image, index)=> (
 						<Carousel.Item key={`${image.src}${index}`}>
