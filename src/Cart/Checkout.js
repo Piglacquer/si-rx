@@ -1,10 +1,17 @@
 import React from 'react';
 import { Button } from 'react-bootstrap';
 
-const Checkout = ({ cartUrl }) => {
+const Checkout = ({ cartUrl, disabled }) => {
+	console.warn('yeet disabled', disabled);
 	return (
 		<>
-			<Button href={cartUrl} variant='outline-success'>CHECKOUT</Button>
+			<Button 
+				disabled={disabled}
+				href={cartUrl}
+				variant={disabled ? 'secondary' : 'outline-success'}
+			>
+				CHECKOUT
+			</Button>
 		</>
 	);
 }

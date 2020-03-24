@@ -1,12 +1,20 @@
 .cart-page {
 	margin-top: 70px;
-	
-	.page-header {
-		margin-left: 20px;
-	}
+	margin-left: 20px;
+	margin-right: 20px;
 
-	.empty-cart-message {
+	.cart-summary-container {
 		display: flex;
-		justify-content: center;
+		flex-flow: row nowrap;
+		justify-content: space-between;
+		width: 100%;
+
+		.item-list {
+			width: 100%;
+		}
+		.empty-cart-message {
+			display: flex;
+			justify-content: center;
+		}
 	}
 }

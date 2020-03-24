@@ -9,7 +9,7 @@ const AppRouter = () => (
 	<Router>
 		<HomePage path='/' />
 		<ShopPage path='/shop' />
-		<BlogPage path='/blog' />
+		{/* <BlogPage path='/blog' /> */}
 		<CartPage path='/cart' />
 	</Router>
 );

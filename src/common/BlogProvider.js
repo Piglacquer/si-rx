@@ -8,7 +8,6 @@ export const BlogProvider = ({children}) => {
 
 	const addBlogs = useCallback(blogs => setBlogs(blogs), [setBlogs]);
 	const fetchBlogs = () => {
-		// yeet change this to deployed url
 		fetch('https://sirx-middleware.herokuapp.com/blog').then(resp => resp.json()).then(addBlogs).then(() => setBlogsFetched(true))
 	}
 	const value = { blogs, fetchBlogs, blogsFetched };

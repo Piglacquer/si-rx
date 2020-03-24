@@ -1,0 +1,12 @@
+.summary-container {
+	display: flex;
+	padding: 10px;
+	width: 25%;
+
+	.summary-section {
+		display: flex;
+		flex-flow: row nowrap;
+		justify-content: space-between;
+	}
+
+}
