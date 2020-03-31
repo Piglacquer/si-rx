@@ -7,7 +7,7 @@ import ShopPage from '../Shop/ShopPage';
 import CartPage from '../Cart/CartPage';
 
 const RoutesContainer = posed.div({
-	enter: { opacity: 1, delay: 200 },
+	enter: { opacity: 1, delay: 300 },
 	exit: { opacity: 0 }
 });
 
