@@ -17,8 +17,8 @@ const NavBar = () => {
 			</div>
 			<div className='links-container'>
 				{/* <Link className='link' to='/blog'>Blog</Link> */}
-				<Link className='link' to='/shop'>Shop</Link>
-				<Link className='link' to='/cart'>
+				<Link className='link' to='shop'>Shop</Link>
+				<Link className='link' to='cart'>
 					Cart
 						{lineItems?.length > 0 && <p className='items-number'>{lineItems?.length}</p>}
 				</Link>
